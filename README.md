@@ -1,35 +1,37 @@
 # MongoDB
 > Verwendung der Datenbank MongoDB um die **json** Statistikdaten von srt-live-transmit direkt abspeichern zu können.  
-`srt-live-transmit udp://224.0.0.1:9999 srt://217.160.70.147:1995 -s 1000 -pf json -statsout:stats.log`  
-So werden die Statistikdaten in der Datei stats.log laufend gespeichert. Ich such e noch nach einem Weg, diese Daten direkt in MongoDB zu speichern.  
 
-## installieren (Ubuntu 20.04)  
+## srt-live-transmit
+`srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://217.160.70.147:1995 -s 1000 -pf json -statsout:stats.log`  
+So werden die Statistikdaten in der Datei stats.log laufend gespeichert. Ich suche noch nach einem Weg, diese Daten direkt in MongoDB zu speichern.  
+
+## MongoDB installieren (Ubuntu 20.04)  
 `sudo apt install mongodb`  
 
+**Nach der Installation läuft die Datenbank sofort. (Ohne Passwort!) Für die StreamBox ist das o.k.
 `sudo systemctl status mongodb`  
 
 ## Linux Bash:  
 `mongo --eval "printjson(db.serverStatus())" `  
-MongoDB starten:  
+MongoDB starten und zur mongo-Shell wechseln:  
 `mongo` 
 `> show dbs`  
 `> use <database>`  
 `> db.adminCommand('listDatabases')`  
-`> show collections` oder `> show tables`  
+`> show collections` entspricht `> show tables`  
 `> db.getCollectionNames()`  
 `> db.<collection>.find()` 
 
+### Daten von srt-live-transmit in Datenbank einfügen
+#### direkt von der Linux Bash Shell
+`mongo srt_db --eval 'db.transmit.insert(
+{"sid":749640009,"timepoint":"2021-05-17T12:56:23.135103+0200","time":"336106","window":{"flow":"7637","congestion":"8192","flight":"6"},"link":{"rtt":"35.4","bandwidth":"1.164","maxBandwidth":"1000"},"send":{"packets":"502","packetsUnique":"502","packetsLost":"0","packetsDropped":"0","packetsRetransmitted":"0","packetsFilterExtra":"0","bytes":"542848","bytesUnique":"542848","bytesDropped":"0","byteAvailBuf":"12280500","msBuf":"17","mbitRate":"0.933062","sendPeriod":"7"},"recv":{"packets":"0","packetsUnique":"0","packetsLost":"0","packetsDropped":"0","packetsRetransmitted":"0","packetsBelated":"0","packetsFilterExtra":"0","packetsFilterSupply":"0","packetsFilterLoss":"0","bytes":"0","bytesUnique":"0","bytesLost":"0","bytesDropped":"0","byteAvailBuf":"12286500","msBuf":"0","mbitRate":"0","msTsbPdDelay":"120"}} 
+)'`  
 
-
-### Daten in Datenbank einfügen:
-`mongo srt_db --eval 'db.transmit.insert( {"sid":749640009,"timepoint":"2021-05-17T12:56:23.135103+0200","time":"336106","window":{"flow":"7637","congestion":"8192","flight":"6"},"link":{"rtt":"35.4","bandwidth":"1.164","maxBandwidth":"1000"},"send":{"packets":"502","packetsUnique":"502","packetsLost":"0","packetsDropped":"0","packetsRetransmitted":"0","packetsFilterExtra":"0","bytes":"542848","bytesUnique":"542848","bytesDropped":"0","byteAvailBuf":"12280500","msBuf":"17","mbitRate":"0.933062","sendPeriod":"7"},"recv":{"packets":"0","packetsUnique":"0","packetsLost":"0","packetsDropped":"0","packetsRetransmitted":"0","packetsBelated":"0","packetsFilterExtra":"0","packetsFilterSupply":"0","packetsFilterLoss":"0","bytes":"0","bytesUnique":"0","bytesLost":"0","bytesDropped":"0","byteAvailBuf":"12286500","msBuf":"0","mbitRate":"0","msTsbPdDelay":"120"}} )'`  
-
-`> db.transmit.insert( {"sid":749640009,"timepoint":"2021-05-17T12:56:23.135103+0200","time":"336106","window":{"flow":"7637","congestion":"8192","flight":"6"},"link":{"rtt":"35.4","bandwidth":"1.164","maxBandwidth":"1000"},"send":{"packets":"502","packetsUnique":"502","packetsLost":"0","packetsDropped":"0","packetsRetransmitted":"0","packetsFilterExtra":"0","bytes":"542848","bytesUnique":"542848","bytesDropped":"0","byteAvailBuf":"12280500","msBuf":"17","mbitRate":"0.933062","sendPeriod":"7"},"recv":{"packets":"0","packetsUnique":"0","packetsLost":"0","packetsDropped":"0","packetsRetransmitted":"0","packetsBelated":"0","packetsFilterExtra":"0","packetsFilterSupply":"0","packetsFilterLoss":"0","bytes":"0","bytesUnique":"0","bytesLost":"0","bytesDropped":"0","byteAvailBuf":"12286500","msBuf":"0","mbitRate":"0","msTsbPdDelay":"120"}}  ) `  
-
-Achtung: Beim Aufruf aus der Linux Bash-Shell muss der Ausdruck hinter `--eval` mit einfachen Hochkommas `'` eingeschlossen werden, `"` funktionieren nicht.
+Achtung: Beim Aufruf aus der Linux Bash-Shell muss der Ausdruck hinter `--eval` mit einfachen Hochkommas `'` eingeschlossen werden, doppelte Hochkommas `"` funktionieren nicht!  
 
 ### Datenbankabfrage
-aus der Linux Shell:  
+direkt aus der Linux Shell:  
 `mongo srt_db --eval 'db.transmit.find().sort({timepoint: -1}).limit(1)'`  
 mit `--quiet` als erste Option, vor `--eval` wird der Header nicht mit ausgegeben.  
 aus der Mongo-Shell:  
