@@ -2,7 +2,7 @@
 > Verwendung der Datenbank MongoDB um die **json** Statistikdaten von srt-live-transmit direkt abspeichern zu können.  
 
 ## srt-live-transmit
-`srt-live-transmit -q udp://224.0.0.1:9999?mode=listener srt://217.160.70.147:1995 -s 1000 -pf json -statsout:stats.log`  
+`srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://217.160.70.147:1995 -s 1000 -pf json -statsout:stats.log`  
 So werden die Statistikdaten in der Datei stats.log laufend gespeichert. Ich suche noch nach einem Weg, diese Daten direkt in MongoDB zu speichern.  
 `srt-live-transmit -q udp://224.0.0.1:9999 srt://217.160.70.147:1995 -s 500 -pf json`  
 Der Parameter `-q  quiet mode` verhindert jede andere Ausgabe in der Konsole. Es werden nur die Statistikdaten geschrieben.
@@ -10,7 +10,7 @@ Der Parameter `-q  quiet mode` verhindert jede andere Ausgabe in der Konsole. Es
 ## MongoDB installieren (Ubuntu 20.04)  
 `sudo apt install mongodb`  
 
-**Nach der Installation läuft die Datenbank sofort. (Ohne Passwort!) Für die StreamBox ist das o.k.
+**Nach der Installation läuft die Datenbank sofort. (Ohne Passwort!) Für die StreamBox ist das o.k.**
 `sudo systemctl status mongodb`  
 
 ## Linux Bash:  
