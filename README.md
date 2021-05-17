@@ -90,3 +90,16 @@ MongoDB server version: 3.6.8
 }
 
 ```
+**Ein Problem ist die von MongoDB übergebene interne Datenbank-ID mit () "\_id". Damit kommt der Parser jq nicht zurecht. Deshalb sollte man mit "find({},{\_id:0})" zuerst diese ID wieder löschen.**    
+Mit diesem Aufruf bekomme ich sauberen json-Code:  
+`mongo --quiet srt_db --eval '(db.transmit.find**({},{_id:0})**.sort({timepoint: -1}).limit(1))'`  
+diesen Ausdruck dann noch durch eine Pipe zu jq:  
+`| jq '.link'` zeigt mir die Linkdaten an.  
+`{  
+  "rtt": "33.809",  
+  "bandwidth": "1.128",  
+  "maxBandwidth": "1000"  
+}`  
+`| jq '.link.bandwidth' ` gibt mir die Bandbreite zurück:  
+`"1.128"`  
+
