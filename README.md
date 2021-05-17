@@ -28,6 +28,7 @@ Achtung: Beim Aufruf aus der Linux Bash-Shell muss der Ausdruck hinter `--eval` 
 Datenbankabfrage
 aus der Linux Shell:  
 `mongo srt_db --eval 'db.transmit.find().sort({timepoint: -1}).limit(1)'`  
+mit `--quiet` als erste Option, vor `--eval` wird der Header nicht mit ausgegeben.  
 aus der Mongo-Shell:  
 `> db.transmit.find().sort({timepoint:-1}).limit(1).pretty()`  
 
