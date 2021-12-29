@@ -1,5 +1,6 @@
 # MongoDB srt-statistik
 > Verwendung der Datenbank MongoDB um die **json** Statistikdaten von srt-live-transmit direkt abspeichern zu können.  
+Aktuell experimentiere ich auch hier noch: https://github.com/richtertoralf/srt-statistik.git  
 
 ## srt-live-transmit
 `srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://217.160.70.147:1995 -s 1000 -pf json -statsout:stats.log`  
