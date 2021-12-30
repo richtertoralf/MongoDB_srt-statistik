@@ -3,9 +3,9 @@
 Aktuell experimentiere ich auch hier noch: https://github.com/richtertoralf/srt-statistik.git  
 
 ## srt-live-transmit
-`srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://217.160.70.147:1995 -s 1000 -pf json -statsout:stats.log`  
+`srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://xxx.xxx.xxx.xxx:1995 -s 1000 -pf json -statsout:stats.log`  
 So werden die Statistikdaten in der Datei stats.log laufend gespeichert. Ich suche noch nach einem Weg, diese Daten direkt in MongoDB zu speichern.  
-`srt-live-transmit -q udp://224.0.0.1:9999 srt://217.160.70.147:1995 -s 500 -pf json`  
+`srt-live-transmit -q udp://224.0.0.1:9999 srt://xxx.xxx.xxx.xxx:1995 -s 500 -pf json`  
 Der Parameter `-q  quiet mode` verhindert jede andere Ausgabe in der Konsole. Es werden nur die Statistikdaten geschrieben.
 
 ## Beispiel für einen Datensatz
