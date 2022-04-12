@@ -1,6 +1,9 @@
 # MongoDB srt-statistik
-> Verwendung der Datenbank MongoDB um die **json** Statistikdaten von srt-live-transmit direkt abspeichern zu können.  
+>Verwendung der Datenbank MongoDB um die **json** Statistikdaten von srt-live-transmit direkt abspeichern zu können.  
 Aktuell experimentiere ich auch hier noch: https://github.com/richtertoralf/srt-statistik.git  
+>Wie immer gibt es auch hier viele Wege. Um schnell und einfach paar wenige aktuelle Werte (Ping, Bandbreite und Bitrate) über dem Videostream in OBS Studio einzublenden, reicht es aus, die Statistikdaten als json in eine Datei zu schreiben und von dort die gewünschten Werte auszulesen und dann als txt-Datei OBS zur Verfügung zu stellen.
+>Die Verwendung von Mongo-DB ermöglicht sehr ausführliche Statistiken und in Verbindung z.B. mit Grafana sehr schöne Live-Grafiken/Dashboards.
+>Das geht bei den wenigen Werten aber auch mit paar Zeilen JavaScript, HTML und CSS.  
 
 ## srt-live-transmit
 `srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://xxx.xxx.xxx.xxx:1995 -s 1000 -pf json -statsout:stats.log`  
