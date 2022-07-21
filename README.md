@@ -82,6 +82,10 @@ MongoDB starten und zur mongo-Shell wechseln:
 `> db.getCollectionNames()`  
 `> db.<collection>.find()` 
 
+## CRUD Kommandos
+CRUD - Operationen sind: create, read, update, and delete, also erstellen, lesen, aktualisieren und löschen.  
+[MongoDB CRUD Operations](https://www.mongodb.com/docs/manual/crud/)  
+
 ### Daten von srt-live-transmit in Datenbank einfügen
 #### direkt von der Linux Bash Shell
 `mongo srt_db --eval 'db.transmit.insert(
