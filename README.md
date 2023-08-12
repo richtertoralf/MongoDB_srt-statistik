@@ -6,7 +6,7 @@ Aktuell experimentiere ich auch hier noch: https://github.com/richtertoralf/srt-
 >Die Verwendung von Mongo-DB ermöglicht sehr ausführliche Statistiken und in Verbindung z.B. mit Grafana sehr schöne Live-Grafiken/Dashboards.
 >Das geht bei den wenigen Werten aber auch mit paar Zeilen JavaScript, HTML und CSS. Eigentlich wäre auch eine RESTfull-API hierzu angebracht.  
 
-**MongoDB funktioniert seit der Version 4.4 nicht mehr ohne weiteres auf einem RaspberryPi und erst recht nicht mehr auf einem RaspberryPi Zero (auch 2) nicht. Wenn eine NoSQL-Datenbank auf einen RaspberryPi benötigt wird, kann ich tinydb empfehlen**  
+**MongoDB funktioniert seit der Version 4.4 nicht mehr ohne weiteres auf einem RaspberryPi und erst recht nicht mehr auf einem RaspberryPi Zero (auch 2). Wenn eine NoSQL-Datenbank auf einen RaspberryPi benötigt wird, kann ich tinydb empfehlen**  
 ```
 # python3 ist standardgemäß im RaspberryPi-OS (getestet mit: RasperryPi OS lite 64bit / Debian GNU/Linux 11 im August 2023) enthalten / Installation per pip:  
 sudo apt install python3-pip
