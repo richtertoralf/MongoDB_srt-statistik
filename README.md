@@ -4,9 +4,23 @@ Aktuell experimentiere ich auch hier noch: https://github.com/richtertoralf/srt-
 
 >Wie immer gibt es auch hier viele Wege. Um schnell und einfach paar wenige aktuelle Werte (Ping, Bandbreite und Bitrate) über dem Videostream in OBS Studio einzublenden, reicht es aus, die Statistikdaten als json in eine Datei zu schreiben und von dort die gewünschten Werte auszulesen und dann als txt-Datei OBS zur Verfügung zu stellen.
 >Die Verwendung von Mongo-DB ermöglicht sehr ausführliche Statistiken und in Verbindung z.B. mit Grafana sehr schöne Live-Grafiken/Dashboards.
->Das geht bei den wenigen Werten aber auch mit paar Zeilen JavaScript, HTML und CSS.  
+>Das geht bei den wenigen Werten aber auch mit paar Zeilen JavaScript, HTML und CSS.
+
+**MongoDB funktioniert seit der Version 4.4 nicht mehr ohne weiteres auf einem RaspberryPi und erst recht nicht mehr auf einem RaspberryPi Zero (auch 2) nicht. Wenn einen NoSQL-Datenbank auf einen RaspberryPi benötigt wird, kann ich tinydb empfehlen**  
+```
+# python3 ist standardgemäß im RaspberryPi-OS (getestet mit: RasperryPi OS lite 64bit / Debian GNU/Linux 11 im August 2023)
+sudo apt install python3-pip
+pip install tinydb
+# fertig installiert :-)
+```
 
 ## srt-live-transmit
+>In meinem konkreten Anwendungsfall will ich die Statistikdaten eines SRT-Streams, wie verfügbare und benutzte Bandbreite erfassen und auswerten. Mit dem Programm srt-live-transmit kann ich nicht nur einen Videostream im SRT-Format senden und empfangen, es mir die gewünschten Daten auch gleich im json Format.
+```
+# installieren
+sudo apt install srt-tools
+```
+
 `srt-live-transmit udp://224.0.0.1:9999?mode=listener srt://xxx.xxx.xxx.xxx:1995 -s 1000 -pf json -statsout:stats.log`  
 So werden die Statistikdaten in der Datei stats.log laufend gespeichert. Ich suche noch nach einem Weg, diese Daten direkt in MongoDB zu speichern.  
 `srt-live-transmit -q udp://224.0.0.1:9999 srt://xxx.xxx.xxx.xxx:1995 -s 500 -pf json`  
